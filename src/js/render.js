@@ -68,7 +68,10 @@ export default {
 
   // Canvas (image wrapper)
   initCanvas() {
-    const { containerData, imageData } = this;
+    const {
+      containerData,
+      imageData,
+    } = this;
     const { viewMode } = this.options;
     const rotated = Math.abs(imageData.rotate) % 180 === 90;
     const naturalWidth = rotated ? imageData.naturalHeight : imageData.naturalWidth;
@@ -164,7 +167,10 @@ export default {
         }
       }
 
-      ({ width: minCanvasWidth, height: minCanvasHeight } = getAdjustedSizes({
+      ({
+        width: minCanvasWidth,
+        height: minCanvasHeight,
+      } = getAdjustedSizes({
         aspectRatio,
         width: minCanvasWidth,
         height: minCanvasHeight,
@@ -220,10 +226,16 @@ export default {
   },
 
   renderCanvas(changed, transformed) {
-    const { canvasData, imageData } = this;
+    const {
+      canvasData,
+      imageData,
+    } = this;
 
     if (transformed) {
-      const { width: naturalWidth, height: naturalHeight } = getRotatedSizes({
+      const {
+        width: naturalWidth,
+        height: naturalHeight,
+      } = getRotatedSizes({
         width: imageData.naturalWidth * Math.abs(imageData.scaleX || 1),
         height: imageData.naturalHeight * Math.abs(imageData.scaleY || 1),
         degree: imageData.rotate || 0,
@@ -289,7 +301,10 @@ export default {
   },
 
   renderImage(changed) {
-    const { canvasData, imageData } = this;
+    const {
+      canvasData,
+      imageData,
+    } = this;
     const width = imageData.naturalWidth * (canvasData.width / canvasData.naturalWidth);
     const height = imageData.naturalHeight * (canvasData.height / canvasData.naturalHeight);
 
@@ -313,7 +328,10 @@ export default {
   },
 
   initCropBox() {
-    const { options, canvasData } = this;
+    const {
+      options,
+      canvasData,
+    } = this;
     const aspectRatio = options.aspectRatio || options.initialAspectRatio;
     const autoCropArea = Number(options.autoCropArea) || 0.8;
     const cropBoxData = {
@@ -392,6 +410,8 @@ export default {
       // The min/maxCropBoxWidth/Height must be less than container's width/height
       minCropBoxWidth = Math.min(minCropBoxWidth, containerData.width);
       minCropBoxHeight = Math.min(minCropBoxHeight, containerData.height);
+      maxCropBoxWidth = Math.min(maxCropBoxWidth, Number(options.maxCropBoxWidth));
+      maxCropBoxHeight = Math.min(maxCropBoxWidth, Number(options.maxCropBoxHeight));
 
       if (aspectRatio) {
         if (minCropBoxWidth && minCropBoxHeight) {
@@ -442,7 +462,11 @@ export default {
   },
 
   renderCropBox() {
-    const { options, containerData, cropBoxData } = this;
+    const {
+      options,
+      containerData,
+      cropBoxData,
+    } = this;
 
     if (cropBoxData.width > cropBoxData.maxWidth
       || cropBoxData.width < cropBoxData.minWidth) {
@@ -479,7 +503,7 @@ export default {
     if (options.movable && options.cropBoxMovable) {
       // Turn to move the canvas when the crop box is equal to the container
       setData(this.face, DATA_ACTION, cropBoxData.width >= containerData.width
-        && cropBoxData.height >= containerData.height ? ACTION_MOVE : ACTION_ALL);
+      && cropBoxData.height >= containerData.height ? ACTION_MOVE : ACTION_ALL);
     }
 
     setStyle(this.cropBox, assign({

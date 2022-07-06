@@ -91,6 +91,8 @@ export default {
   minCanvasHeight: 0,
   minCropBoxWidth: 0,
   minCropBoxHeight: 0,
+  maxCropBoxWidth: null,
+  maxCropBoxHeight: null,
   minContainerWidth: MIN_CONTAINER_WIDTH,
   minContainerHeight: MIN_CONTAINER_HEIGHT,
 
